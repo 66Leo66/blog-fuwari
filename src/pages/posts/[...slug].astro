@@ -45,6 +45,8 @@ const jsonLd = {
 	// TODO include cover image here
 };
 ---
+<script defer src="https://comentario.6leo6.com/comentario.js"></script>
+
 <MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
@@ -131,6 +133,10 @@ const jsonLd = {
                 <Icon name="material-symbols:chevron-right-rounded" class="text-[2rem] text-[var(--primary)]" />
             </div>}
         </a>
+    </div>
+
+    <div class="w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
+        <comentario-comments lang="zh-Hans"></comentario-comments>
     </div>
 
 </MainGridLayout>
