@@ -119,5 +119,14 @@
         padding-bottom: 1em;
         padding: 0 1em 1em 1em;
     }
-    
+
+    /* Typst inline formula - force inline display */
+    /* Need higher specificity to override Tailwind prose class */
+    p > svg.typst-inline,
+    svg.typst-inline {
+        display: inline !important;
+        vertical-align: -0.25em !important;
+        margin: 0 0.1em !important;
+    }
+
 }

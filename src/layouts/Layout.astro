@@ -308,7 +308,7 @@ function initCustomScrollbar() {
 	});
 
 	// we try to simply apply this to our typst stuff
-	const katexElements = document.querySelectorAll('.typst-doc11') as NodeListOf<HTMLElement>;
+	const katexElements = document.querySelectorAll('svg.typst-doc:not(.typst-inline)') as NodeListOf<HTMLElement>;
 
 	const katexObserverOptions = {
 		root: null,

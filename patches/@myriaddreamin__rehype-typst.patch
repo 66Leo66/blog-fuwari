@@ -1,0 +1,21 @@
+diff --git a/lib/index.js b/lib/index.js
+index 056fe8e973a1787391444a490091a97d3626a427..e1903303718c9761af114a1e8ad7dfb62a085e94 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -118,12 +118,13 @@ export default function rehypeTypst(options) {
+         root.children[0].properties.style = `vertical-align: -${shiftEm}em;`;
+         root.children[0].properties.height = `${height / defaultEm}em`;
+         root.children[0].properties.width = `${width / defaultEm}em`;
+-        if (!root.children[0].classNames) root.children[0].classNames = [];
+         if (displayMode) {
+           root.children[0].properties.style += '; display: block; margin: 0 auto;';
+-          root.children[0].classNames;
++          if (!root.children[0].properties.className) {
++            root.children[0].properties.className = ['typst-doc'];
++          }
+         } else {
+-          root.children[0].classNames.push('typst-inline');
++          root.children[0].properties.className = ['typst-inline'];
+         }
+         result = /** @type {Array<ElementContent>} */ (root.children);
+       }
