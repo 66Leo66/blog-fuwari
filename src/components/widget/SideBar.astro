@@ -27,14 +27,15 @@ const showSidebarTOC = siteConfig.toc.enable && isPostsRoute && headings.length 
     <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
         <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
-        {showSidebarTOC && (
-            <WidgetLayout id="sidebar-toc" name={i18n(I18nKey.toc)} class="block 2xl:hidden onload-animation" style="animation-delay: 250ms">
-                <div class="toc-inner-wrapper max-h-[50vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
-                    <div class="toc-content">
+        <!-- Sidebar TOC container - Swup will replace this content on page transitions -->
+        <div id="sidebar-toc-container" class="block 2xl:hidden transition-swup-fade">
+            {showSidebarTOC && (
+                <WidgetLayout id="sidebar-toc-widget" name={i18n(I18nKey.toc)} class="onload-animation" style="animation-delay: 250ms">
+                    <div class="toc-inner-wrapper max-h-[50vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
                         <TOC headings={headings}></TOC>
                     </div>
-                </div>
-            </WidgetLayout>
-        )}
+                </WidgetLayout>
+            )}
+        </div>
     </div>
 </div>
