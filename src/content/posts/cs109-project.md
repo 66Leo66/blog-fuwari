@@ -1,5 +1,5 @@
 ---
-title: CS109象棋期末Project 
+title: CS109 期末 Project：象棋游戏
 published: 2025-12-22
 tags:
   - sustech
