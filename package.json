@@ -31,6 +31,7 @@
 		"@iconify-json/fa6-solid": "^1.2.4",
 		"@iconify-json/material-symbols": "^1.2.50",
 		"@iconify/svelte": "^4.2.0",
+		"@myriaddreamin/rehype-typst": "0.6.1-rc3",
 		"@swup/astro": "^1.7.0",
 		"@tailwindcss/typography": "^0.5.19",
 		"astro": "5.13.10",
@@ -72,5 +73,10 @@
 		"postcss-import": "^16.1.1",
 		"postcss-nesting": "^13.0.2"
 	},
-	"packageManager": "pnpm@9.14.4"
+	"packageManager": "pnpm@9.14.4",
+	"pnpm": {
+		"patchedDependencies": {
+			"@myriaddreamin/rehype-typst": "patches/@myriaddreamin__rehype-typst.patch"
+		}
+	}
 }

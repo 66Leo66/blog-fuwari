@@ -4,3 +4,4 @@ exclude_selectors:
   - "[data-pagefind-ignore]"
   - ".search-panel"
   - "#search-panel"
+  - "svg.typst-doc"
