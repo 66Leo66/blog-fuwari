@@ -364,7 +364,8 @@ curl -L https://chal02-114514.hack-challenge.lug.ustc.edu.cn:8443/submit -F 'fil
 找到 [猫咪问答的 Write-up](https://github.com/ustclug/hackergame2018-writeups/blob/master/official/ustcquiz/README.md)
 
 > 在中国科大图书馆中，有一本书叫做《程序员的自我修养:链接、装载与库》，请问它的索书号是？
-> 打开中国科大图书馆主页，直接搜索“程序员的自我修养”即可。
+
+打开中国科大图书馆主页，直接搜索“程序员的自我修养”即可。
 
 同时注意到 [其他花絮](https://github.com/ustclug/hackergame2018-writeups/blob/master/misc/others.md)
 
