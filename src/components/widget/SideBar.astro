@@ -1,8 +1,14 @@
 ---
 import type { MarkdownHeading } from "astro";
+import { siteConfig } from "../../config";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
+import { url } from "../../utils/url-utils";
 import Categories from "./Categories.astro";
 import Profile from "./Profile.astro";
 import Tag from "./Tags.astro";
+import TOC from "./TOC.astro";
+import WidgetLayout from "./WidgetLayout.astro";
 
 interface Props {
 	class?: string;
@@ -10,6 +16,9 @@ interface Props {
 }
 
 const className = Astro.props.class;
+const { headings = [] } = Astro.props;
+const isPostsRoute = Astro.url.pathname.startsWith(url("/posts/"));
+const showSidebarTOC = siteConfig.toc.enable && isPostsRoute && headings.length > 0;
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
     <div class="flex flex-col w-full gap-4 mb-4">
@@ -18,5 +27,14 @@ const className = Astro.props.class;
     <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
         <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+        {showSidebarTOC && (
+            <WidgetLayout id="sidebar-toc" name={i18n(I18nKey.toc)} class="block 2xl:hidden onload-animation" style="animation-delay: 250ms">
+                <div class="toc-inner-wrapper max-h-[50vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
+                    <div class="toc-content">
+                        <TOC headings={headings}></TOC>
+                    </div>
+                </div>
+            </WidgetLayout>
+        )}
     </div>
 </div>
