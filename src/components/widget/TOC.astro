@@ -30,8 +30,9 @@ const removeTailingHash = (text: string) => {
 let heading1Count = 1;
 
 const maxLevel = siteConfig.toc.depth;
+const hasValidHeadings = headings.some((h) => h.depth <= 4);
 ---
-{isPostsRoute &&
+{isPostsRoute && hasValidHeadings &&
 <table-of-contents class:list={[className, "group relative"]}>
     {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
             <a href={`#${heading.slug}`} class="toc-link px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
