@@ -119,7 +119,7 @@ const mainPanelTop = siteConfig.banner.enable
         </div>}
 
         <!-- #toc needs to exist for Swup to work normally -->
-        {!siteConfig.toc.enable && <div id="toc"></div>}
+        {!(siteConfig.toc.enable && headings.some(h => h.depth <= 4)) && <div id="toc"></div>}
     </div>
 </div>
 </Layout>
