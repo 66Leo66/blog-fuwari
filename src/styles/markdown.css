@@ -120,6 +120,14 @@
         padding: 0 1em 1em 1em;
     }
 
+    /* Typst display formula container - added at build time */
+    .typst-display-container {
+        max-width: 100%;
+        overflow-x: auto;
+        margin: 1em 0;
+        padding: 0 1em 1em 1em;
+    }
+
     /* Typst inline formula - force inline display */
     /* Need higher specificity to override Tailwind prose class */
     p > svg.typst-inline,

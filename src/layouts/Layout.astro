@@ -306,27 +306,14 @@ function initCustomScrollbar() {
 			autoHideSuspend: false,
 		},
 	});
+}
 
-	// we try to simply apply this to our typst stuff
-	const katexElements = document.querySelectorAll('svg.typst-doc:not(.typst-inline)') as NodeListOf<HTMLElement>;
-
-	const katexObserverOptions = {
-		root: null,
-		rootMargin: '100px',
-		threshold: 0.1
-	};
-
-	const processKatexElement = (element: HTMLElement) => {
-		if (!element.parentNode) return;
-		if (element.hasAttribute('data-scrollbar-initialized')) return;
-
-		const container = document.createElement('div');
-		container.className = 'katex-display-container';
-		container.setAttribute('aria-label', 'scrollable container for formulas');
-
-		element.parentNode.insertBefore(container, element);
-		container.appendChild(element);
-
+// Initialize OverlayScrollbars on typst display containers
+// Called separately after Astro islands hydrate to avoid DOM mutation conflicts
+function initTypstScrollbars() {
+	const typstContainers = document.querySelectorAll('.typst-display-container') as NodeListOf<HTMLElement>;
+	typstContainers.forEach(container => {
+		if (container.hasAttribute('data-scrollbar-initialized')) return;
 		OverlayScrollbars(container, {
 			scrollbars: {
 				theme: 'scrollbar-base scrollbar-auto',
@@ -335,21 +322,7 @@ function initCustomScrollbar() {
 				autoHideSuspend: false
 			}
 		});
-
-		element.setAttribute('data-scrollbar-initialized', 'true');
-	};
-
-	const katexObserver = new IntersectionObserver((entries, observer) => {
-		entries.forEach(entry => {
-			if (true || entry.isIntersecting) {
-			processKatexElement(entry.target as HTMLElement);
-			observer.unobserve(entry.target);
-			}
-		});
-	}, katexObserverOptions);
-
-	katexElements.forEach(element => {
-		katexObserver.observe(element);
+		container.setAttribute('data-scrollbar-initialized', 'true');
 	});
 }
 
@@ -375,6 +348,14 @@ function init() {
 
 /* Load settings when entering the site */
 init();
+
+// Initialize typst scrollbars after Astro islands hydrate to avoid DOM conflicts
+// Use requestIdleCallback to ensure all rendering is complete
+if ('requestIdleCallback' in window) {
+	requestIdleCallback(() => initTypstScrollbars());
+} else {
+	setTimeout(initTypstScrollbars, 100);
+}
 
 const setup = () => {
 	// TODO: temp solution to change the height of the banner
@@ -407,6 +388,7 @@ const setup = () => {
 		}
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
+	window.swup.hooks.on('content:replace', initTypstScrollbars)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
