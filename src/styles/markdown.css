@@ -129,4 +129,16 @@
         margin: 0 0.1em !important;
     }
 
+    svg.typst-inline,
+    svg.typst-doc {
+        --glyph_fill: currentColor;
+        --glyph_stroke: currentColor;
+        fill: currentColor;
+
+        .typst-shape {
+            fill: currentColor;
+            stroke: currentColor;
+        }
+    }
+
 }
