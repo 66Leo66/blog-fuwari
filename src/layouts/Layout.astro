@@ -424,10 +424,15 @@ const setup = () => {
 				heightExtend.classList.add('hidden')
 			}
 
-            // Just make the transition looks better
+            // Only reveal the TOC wrapper when the new page actually has TOC content.
+            // If there is no table-of-contents element, keep toc-not-ready so the empty
+            // wrapper stays hidden (it was set in visit:start or server-rendered).
             const toc = document.getElementById('toc-wrapper');
             if (toc) {
-                toc.classList.remove('toc-not-ready')
+                const hasTocContent = !!document.querySelector('#toc table-of-contents');
+                if (hasTocContent) {
+                    toc.classList.remove('toc-not-ready');
+                }
             }
         }, 200)
 	});
