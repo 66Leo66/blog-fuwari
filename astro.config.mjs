@@ -5,7 +5,7 @@ import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-s
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeTypst from "@myriaddreamin/rehype-typst";
 import swup from "@swup/astro";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -30,6 +30,15 @@ export default defineConfig({
 	site: "https://blog.6leo6.com/",
 	base: "/",
 	trailingSlash: "always",
+	fonts: [
+		{
+			provider: fontProviders.npm(),
+			name: "JetBrains Mono Variable",
+			cssVariable: "--font-jetbrains-mono",
+			weights: [400, 500, 700],
+			styles: ["normal", "italic"],
+		},
+	],
 	integrations: [
 		tailwind({
 			nesting: true,
@@ -79,8 +88,7 @@ export default defineConfig({
 				borderRadius: "0.75rem",
 				borderColor: "none",
 				codeFontSize: "0.875rem",
-				codeFontFamily:
-					"'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+				codeFontFamily: "var(--font-jetbrains-mono)",
 				codeLineHeight: "1.5rem",
 				frames: {
 					editorBackground: "var(--codeblock-bg)",
