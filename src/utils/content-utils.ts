@@ -3,8 +3,10 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
 
+type PostEntry = CollectionEntry<"posts">;
+
 // // Retrieve posts and sort them by publication date
-async function getRawSortedPosts() {
+async function getRawSortedPosts(): Promise<PostEntry[]> {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
@@ -17,7 +19,7 @@ async function getRawSortedPosts() {
 	return sorted;
 }
 
-export async function getSortedPosts() {
+export async function getSortedPosts(): Promise<PostEntry[]> {
 	const sorted = await getRawSortedPosts();
 
 	for (let i = 1; i < sorted.length; i++) {
